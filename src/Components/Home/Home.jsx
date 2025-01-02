@@ -4,16 +4,24 @@ import HomeIcon from '@mui/icons-material/Home';
 import icon from '../../image.png';
 import Menu from '@mui/material/Menu';
 import TableChartIcon from '@mui/icons-material/TableChart';
-import { GetAdmin } from "../../Api";
+import { GetAdmin, GetAllUsers } from "../../utils/Api";
+import { useDispatch } from "react-redux";
+import { getUserlist } from "../../utils/Store/UserSlice";
+
 
 
 const Home = () =>{
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [open, setOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const openProfile = Boolean(anchorEl);
     const name = localStorage.getItem("name");
+    const handleData = async() =>{
+        const data = await GetAllUsers("all");
+        dispatch(getUserlist(data?.data?.data));
+    }
     const handleClick = (action) =>{
         if(action === "home"){
             navigate('/home/welcome');
@@ -38,15 +46,23 @@ const Home = () =>{
     };
 
     const handleUser = async() => {
-        const data = await GetAdmin("");
-        navigate("/home/profile", {state: data.data.data})
-        handleClose();
+        try{
+            const data = await GetAdmin("");
+            navigate("/home/profile", {state: data.data.data})
+            handleClose();
+        }catch(error){
+            console.log(error);
+        }
     } 
 
     const handleLogout = () =>{
         localStorage.removeItem("ref");
         navigate("/login", {replace: true});
     };
+
+    useEffect(() => {
+        handleData();
+    }, []); 
 
     return (
         <>
@@ -61,7 +77,7 @@ const Home = () =>{
                     onClose={handleClose}
                     >
                     <div className="flex flex-col p-2 items-center gap-2 md:gap-3 md:p-4 md:min-w-32 min-w-20">
-                        <span className="text-xs cursor-pointer hover:text-red-300 text-center md:text-lg" onClick={() => handleUser()}>Hii <br/>{name}</span>
+                        <span className="text-xs cursor-pointer hover:text-red-300 text-center md:text-lg" onClick={() => handleUser()}>Hii <br/>{name.split(" ")[0]}</span>
                         <button className="bg-rose-400 px-2 py-1 rounded-lg hover:bg-neutral-300 text-white text-xs md:text-lg" onClick={() => handleLogout()}>Logout</button>
                     </div>
                     </Menu>

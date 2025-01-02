@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import icon from './../../image.png';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { EditAdmin } from '../../Api';
+import { EditAdmin } from '../../utils/Api';
+
 
 
 const Profile = () =>{
@@ -32,7 +33,7 @@ const Profile = () =>{
     const handleSave = async(e) =>{
         e.preventDefault();
         try{
-            const data = await EditAdmin("", {name, emailId});
+            await EditAdmin("", {name, emailId});
             localStorage.setItem("name", name);
             setActiveName(true);
             setActiveEmail(true);
@@ -53,7 +54,7 @@ const Profile = () =>{
                             <span className="text-2xl font-mono text-gray-300 ">Profile</span>
                             <hr className='flex-grow h-1 bg-white '/>
                         </div>
-                        <img src={icon} alt="image" className='rounded-[50%] w-20  h-20'onError={(e) =>e.target.src = icon}/>
+                        <img src={icon} alt="icon" className='rounded-[50%] w-20  h-20'onError={(e) =>e.target.src = icon}/>
                     </div>
                     <div className='flex flex-row justify-between border border-2 border-red-400 p-2 rounded-lg bg-orange-300'>
                         {activeName?

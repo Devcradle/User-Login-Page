@@ -1,22 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import icon from './../../image.png';
 import { useEffect, useState } from 'react';
-import { GetAllUsers } from '../../Api';
+import { useSelector } from 'react-redux';
+
 
 const UserTable = () => {
     const navigate = useNavigate();
+    const getData = useSelector((store) => store.user.userList);
     const [userData, setUserData] = useState([]);
-    const handleData = async() =>{
-        try{
-            const data = await GetAllUsers("all");
-            setUserData(data.data.data);
-        }catch(error){
-            console.log(error);
-        }
-    };
     useEffect(() => {
-        handleData();
-    }, [])
+        setUserData(getData);
+    }, []);
 
     return (
         <>      
@@ -37,9 +31,9 @@ const UserTable = () => {
                         </thead>
                         <tbody >
                             {userData.map((item) => (
-                            <tr key={item.id} className='border-b border-2 border-slate-200 rounded-2xl dark:border-white'>
+                            <tr key={item._id} className='border-b border-2 border-slate-200 rounded-2xl dark:border-white'>
                                 <td className="dark:border-white flex justify-center p-2 ">
-                                    <img src={item.image.path} alt="image" className='h-10 w-10 md:h-16 md:w-16 border border-1 border-black rounded-lg hover:bg-blue-300'
+                                    <img src={item.image.path} alt="icon" className='h-10 w-10 md:h-16 md:w-16 border border-1 border-black rounded-lg hover:bg-blue-300'
                                     onError={(e) => {e.target.src = icon}}/>
                                 </td>
                                 <td className=" text-center p-1 text-xs md:text-lg dark:border-white w-fit h-fit text-wrap">{item.name}</td>
@@ -49,6 +43,7 @@ const UserTable = () => {
                             </tr>))}
                         </tbody>
                     </table>
+                    {!userData.length && <div className='text-center text-lg py-10 dark:text-white'>Click on the AddUser Button for adding Users</div>}
             </div>
             </div>
         </>

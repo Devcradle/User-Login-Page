@@ -48,7 +48,7 @@ export const ForgetPasswordUser = async(endpoint, payload) =>{
 
 export const ResetPasswordUser = async(endpoint, payload) =>{
     return (
-        await axios.post(`${BASE_URL}/${endpoint}`, payload)
+        await axios.put(`${BASE_URL}/${endpoint}`, payload)
     );
 }
 

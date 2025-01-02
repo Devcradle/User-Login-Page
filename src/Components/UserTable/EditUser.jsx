@@ -1,7 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import icon from '../../image.png';
 import { useEffect, useState } from "react";
-import { EditUser_ } from '../../Api';
+import { EditUser_ } from "../../utils/Api";
+
 
 const EditUser= () =>{
     const [name, setName] = useState("");
@@ -19,7 +20,7 @@ const EditUser= () =>{
     const handleSubmit = async(e) =>{
         try{
             e.preventDefault();
-            const data = await EditUser_("", {name, department: dept, designation, id});
+            await EditUser_("", {name, department: dept, designation, id});
             navigate("/home/table");
         }catch(error){
             console.log(error);
@@ -39,7 +40,7 @@ const EditUser= () =>{
                         </div>
                 <div className="bg-white  flex flex-col md:flex-row gap-2 items-center md:items-start md:gap-10 h-full">
                         <div>
-                            <img src={data.image.path} alt="image" onError={(e) => e.target.src = icon} className="w-24 h-24 md:w-32 md:h-32 rounded border border-1 border-gray rounded-[50%] p-1" />
+                            <img src={data.image.path} alt="icon" onError={(e) => e.target.src = icon} className="w-24 h-24 md:w-32 md:h-32 rounded border border-1 border-gray rounded-[50%] p-1" />
                         </div>
                     <div className="flex flex-col items-center gap-4">
                     <div className="flex flex-col gap-4">

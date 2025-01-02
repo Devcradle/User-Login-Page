@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CreateUser_ } from "../../Api";
+import { CreateUser_ } from "../../utils/Api";
 import { useNavigate } from "react-router-dom";
 
 const CreateUser = () =>{
@@ -15,7 +15,7 @@ const CreateUser = () =>{
             formData.append("department", dept);
             formData.append("designation", designation);
             formData.append("image", image);
-            const data = await CreateUser_("", formData);
+            await CreateUser_("", formData);
             navigate("/home/table");
 
         }catch(error){
@@ -33,15 +33,15 @@ const CreateUser = () =>{
                          <form className="flex flex-col gap-3 items-center md:gap-6">
                             <div className="flex flex-row text-xs w-full gap-2 md:gap-4 md:text-lg items-center justify-between">
                                 <label >Enter your name:</label>
-                                <input type="text" className="border border-1 border-black w-28 md:w-36 h-8 md:h-10  rounded px-2 " value={name} placeholder="name" onChange={(e) => setName(e.target.value)}/>    
+                                <input type="text" className="border border-1 dark:text-black border-black w-28 md:w-36 h-8 md:h-10  rounded px-2 " value={name} placeholder="name" onChange={(e) => setName(e.target.value)}/>    
                             </div>
                             <div className="flex flex-row gap-2 md:gap-4 w-full text-xs md:text-lg items-center ">
                                 <label>Enter your department:</label>   
-                                <input type="text" className="border border-1 border-black w-28 rounded px-2 md:w-36 h-8 md:h-10" value={dept} onChange={(e) => setDept(e.target.value)} placeholder="department"/>    
+                                <input type="text" className="border border-1 dark:text-black border-black w-28 rounded px-2 md:w-36 h-8 md:h-10" value={dept} onChange={(e) => setDept(e.target.value)} placeholder="department"/>    
                             </div>
                             <div className="flex flex-row w-full gap-2 md:gap-4 text-xs md:text-lg items-center">
                                 <label>Enter your designation:</label>
-                                    <input type="text" className="border border-1 border-black px-2 w-28 md:w-36 h-8 md:h-10 rounded" value={designation} onChange={(e) => setDesignation(e.target.value)} placeholder="designation"/>    
+                                    <input type="text" className="border border-1 dark:text-black border-black px-2 w-28 md:w-36 h-8 md:h-10 rounded" value={designation} onChange={(e) => setDesignation(e.target.value)} placeholder="designation"/>    
                             </div>
                             <div className="flex flex-row w-full gap-2 text-xs md:text-lg md:gap-4  justify-between items-center">
                                 <label >Upload your image:

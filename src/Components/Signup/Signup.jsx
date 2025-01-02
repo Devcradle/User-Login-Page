@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import { SignUp } from '../../Api';
+import { SignUp } from '../../utils/Api';
 
 const Signup = () =>{
     const [name, setName] = useState("");
@@ -13,16 +13,16 @@ const Signup = () =>{
     const navigate = useNavigate();
     const handleClick = async() =>{
         try{
-            const isNameValid = /^[A-Za-z]{4,}$/.test(name);
+            const isNameValid = /^[A-Za-z]+(\s[A-Za-z]+)*$/.test(name);
             const isEmailIdValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailId);
-            const isPasswordValid = /^[A-Za-z]{8,}$/.test(password);
-
+            const isPasswordValid = /^[A-Za-z0-9!@#$%^&*(),.?":{}|<>]{8,}$/.test(password);
+            console.log(isNameValid, isEmailIdValid, isPasswordValid)
             setCheckName(!isNameValid);
             setCheckEmailId(!isEmailIdValid);
             setCheckPassword(!isPasswordValid);
 
             if (isNameValid && isEmailIdValid && isPasswordValid) {
-                const data = await SignUp("signup", { name, emailId, password });
+                await SignUp("signup", { name, emailId, password });
                 navigate('/login');
             }
 

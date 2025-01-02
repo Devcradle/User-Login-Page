@@ -12,11 +12,12 @@ import UserTable from './Components/UserTable/UserTable';
 import Signup from './Components/Signup/Signup';
 import ForgetPassword from './Components/ForgetPassword/ForgetPassword';
 import Home from './Components/Home/Home';
-import { ForgetPasswordUser, GetAdmin, GetAllUsers, LoginUser, SignUp } from './Api';
+import { ForgetPasswordUser, GetAdmin, GetAllUsers, LoginUser, SignUp } from './utils/Api';
+import { Provider } from 'react-redux';
+import appStore from './utils/Store/AppStore';
 
 
-
-jest.mock('./Api', () => ({
+jest.mock('./utils/Api', () => ({
     GetAllUsers: jest.fn(),
     GetAdmin: jest.fn(),
     LoginUser: jest.fn(),
@@ -62,9 +63,11 @@ jest.mock('./Api', () => ({
 
         test('renders the component with the correct text', () => {
             render(
-            <BrowserRouter>
-                <UserTable/>
-            </BrowserRouter>
+            <Provider store={appStore}>
+                <BrowserRouter>
+                    <UserTable/>
+                </BrowserRouter>
+            </Provider>
             );
             const element = screen.getByText(/Image/i);
             expect(element).toBeInTheDocument();
@@ -72,18 +75,22 @@ jest.mock('./Api', () => ({
     
         test('renders UserTable component', () => {
         render(
-            <BrowserRouter>
-            <UserTable />
-            </BrowserRouter>
+            <Provider store={appStore}>
+                <BrowserRouter>
+                    <UserTable/>
+                </BrowserRouter>
+            </Provider>
         );
         expect(screen.getByText('Add User')).toBeInTheDocument();
         });
     
         test('fetches and displays user data', async () => {
         render(
-            <BrowserRouter>
-            <UserTable />
-            </BrowserRouter>
+            <Provider store={appStore}>
+                <BrowserRouter>
+                    <UserTable/>
+                </BrowserRouter>
+            </Provider>
         );
     
         await waitFor(() => {
@@ -384,9 +391,11 @@ jest.mock('./Api', () => ({
         
         test('renders Home component', () => {
             render(
-            <BrowserRouter>
-                <Home />
-            </BrowserRouter>
+            <Provider store={appStore}>
+                <BrowserRouter>
+                    <Home />
+                </BrowserRouter>
+            </Provider>
             );
             expect(screen.getByText('UserTable')).toBeInTheDocument();
         });
@@ -395,9 +404,11 @@ jest.mock('./Api', () => ({
         
         test('toggles dark mode', () => {
             render(
-            <BrowserRouter>
-                <Home />
-            </BrowserRouter>
+                <Provider store={appStore}>
+                    <BrowserRouter>
+                        <Home />
+                    </BrowserRouter>
+                </Provider>
             );
         
             const toggleButton = screen.getByText(/🌙/);
@@ -413,9 +424,11 @@ jest.mock('./Api', () => ({
         
         test('handles user profile navigation', async () => {
             render(
-            <BrowserRouter>
-                <Home />
-            </BrowserRouter>
+                <Provider store={appStore}>
+                    <BrowserRouter>
+                        <Home />
+                    </BrowserRouter>
+                </Provider>
             );
         
             const profileImage = screen.getByAltText('');
@@ -431,9 +444,11 @@ jest.mock('./Api', () => ({
         
         test('handles logout', () => {
             render(
-            <BrowserRouter>
-                <Home />
-            </BrowserRouter>
+                <Provider store={appStore}>
+                    <BrowserRouter>
+                        <Home />
+                    </BrowserRouter>
+                </Provider>
             );
         
             const profileImage = screen.getByAltText('');

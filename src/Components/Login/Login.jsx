@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginUser } from "../../Api";
+import { LoginUser } from "../../utils/Api";
 
 const Login = () =>{
-    // GoodMorning
-    // table01@gmail.com
+    // kumar0238@gmail.com
+    // Change@2024
     const navigate = useNavigate();
     const [emailId, setEmailId] = useState("");
     const [password, setPassword] = useState("");
@@ -18,8 +18,8 @@ const Login = () =>{
                 setErrorMessage("");
                 const data = await LoginUser("login", { emailId, password });
                 navigate('/home/welcome');
-                localStorage.setItem("ref", data.data.data.token);
-                localStorage.setItem("name", data.data.data.name);
+                localStorage.setItem("ref", data?.data?.data?.token);
+                localStorage.setItem("name", data?.data?.data?.name);
             }else if(!password){
                 setErrorMessage("");
             };
