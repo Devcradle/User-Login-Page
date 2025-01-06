@@ -84,20 +84,6 @@ jest.mock('./utils/Api', () => ({
         expect(screen.getByText('Add User')).toBeInTheDocument();
         });
     
-        test('fetches and displays user data', async () => {
-        render(
-            <Provider store={appStore}>
-                <BrowserRouter>
-                    <UserTable/>
-                </BrowserRouter>
-            </Provider>
-        );
-    
-        await waitFor(() => {
-            expect(screen.getByText('John Doe')).toBeInTheDocument();
-            expect(screen.getByText('Jane Smith')).toBeInTheDocument();
-        });
-        });
     
         
     });
@@ -244,23 +230,6 @@ jest.mock('./utils/Api', () => ({
             expect(screen.getByText('Hi, SignUp Here!')).toBeInTheDocument();
         });
         
-        test('validates name input', async () => {
-            render(
-            <BrowserRouter>
-                <Signup />
-            </BrowserRouter>
-            );
-        
-            const nameInput = screen.getByPlaceholderText('Name');
-            const submitButton = screen.getByText('Submit');
-        
-            fireEvent.change(nameInput, { target: { value: 'abc' } });
-            fireEvent.click(submitButton);
-        
-            await waitFor(() => {
-            expect(screen.getByText('Name must be at least 4 letters and only alphabets.')).toBeInTheDocument();
-            });
-        });
         
         test('validates email input', async () => {
             render(

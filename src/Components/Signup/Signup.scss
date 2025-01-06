@@ -1,0 +1,126 @@
+.signup-maindiv-cnt{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(236, 231, 231);
+    height: 100vh;
+}
+
+.signup-subdiv-cnt{
+    width: fit-content;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-div1-cnt{
+    display: flex;
+    justify-content: center;
+    font-size: 28px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.signup-div2-cnt{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: min-content;
+}
+
+.signup-input1-cnt{
+    border: 1px solid rgb(236, 77, 77);
+    border-radius: 5px;
+    padding: 6px;
+    ::placeholder{
+        background-color: gray;
+    }
+}
+
+.signup-span1-cnt{
+    font-size: 9px;
+    text-align: center;
+    text-wrap: wrap;
+}
+
+.signup-input2-cnt{
+    border: 1px solid rgb(236, 77, 77);
+    border-radius: 5px;
+    padding: 6px;
+    ::placeholder{
+        background-color: gray;
+    }
+}
+
+.signup-span2-cnt{
+    font-size: 9px;
+    text-align: center;
+    text-wrap: wrap;
+}
+
+
+
+.signup-span3-cnt{
+    font-size: 9px;
+    text-align: left;
+    text-wrap: wrap;
+}
+
+.signup-div3-cnt{
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.signup-span4-cnt{
+    font-size: 4px;
+    text-align: center;
+    color: red;
+}
+
+
+.signup-span5-cnt{
+    font-size: 12px;
+    text-align: right;
+}
+
+.signup-span6-cnt{
+    color: blue;
+    font-size: 12px;
+    text-align: right;
+    cursor: pointer;
+}
+
+
+.signup-button1-cnt{
+    background-color: rgb(63, 168, 233);
+    border-radius: 3px;
+    padding: 4px 8px;
+    color: white;
+    &:hover{
+        background-color: gray;
+    }
+}
+
+
+@media (min-width: 320px) and (max-width: 600px){
+    .signup-subdiv-cnt{
+        padding: 20px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px){
+    .signup-subdiv-cnt{
+        padding: 10px;
+    }
+};
+
+@media (min-width: 901px){
+    .signup-subdiv-cnt{
+        padding: 30px 30px;
+    }
+};
+

@@ -2,11 +2,11 @@ import { useNavigate } from 'react-router-dom';
 import icon from './../../image.png';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import './UserTable.scss';
 
 const UserTable = () => {
     const navigate = useNavigate();
-    const getData = useSelector((store) => store.user.userList);
+    const getData = useSelector((store) => store.user.userList) || [];
     const [userData, setUserData] = useState([]);
     useEffect(() => {
         setUserData(getData);
@@ -14,37 +14,37 @@ const UserTable = () => {
 
     return (
         <>      
-            <div className='h-screen bg-gray-200 dark:bg-slate-800'>
-                <div className='w-full flex flex-row py-2 md:px-6 justify-end px-2'>
-                    <button className='p-1 md:px-4 md:py-2 bg-blue-400 border border-1 border-slate-700 hover:bg-neutral-300 rounded text-xs font-medium text-white' onClick={() => navigate("/home/create")}>Add User</button>
+            <div className='userTable-maindiv-cnt'>
+                <div className='userTable-subdiv-cnt'>
+                    <button className='userTable-button1-cnt' onClick={() => navigate("/home/create")}>Add User</button>
                 </div>
-                <div className='px-2 md:px-6'>
-                    <table className="dark:bg-slate-500 bg-white dark:text-white w-full p-1 ">
-                        <thead className=" text-xl bg-yellow-300">
-                            <tr className='border border-2 border-slate-200 rounded-xl dark:border-white dark:border-white '>
-                                <th className=" text-xs md:text-lg p-1 ">Image</th>
-                                <th className=" text-xs md:text-lg p-1 ">Name</th>
-                                <th className=" text-xs md:text-lg  p-1 ">Profession</th>
-                                <th className=" text-xs md:text-lg  p-1 ">Department</th>
-                                <th className=" text-xs md:text-lg  p-1 ">Action</th>
+                <div className='userTable-div1-cnt'>
+                    <table className="userTable-table-cnt">
+                        <thead className="userTable-thead-cnt">
+                            <tr className='userTable-tr1-cnt'>
+                                <th className=" userTable-th1-cnt">Image</th>
+                                <th className=" userTable-th1-cnt">Name</th>
+                                <th className=" userTable-th1-cnt">Profession</th>
+                                <th className=" userTable-th1-cnt">Department</th>
+                                <th className=" userTable-th1-cnt">Action</th>
                             </tr>
                         </thead>
                         <tbody >
                             {userData.map((item) => (
-                            <tr key={item._id} className='border-b border-2 border-slate-200 rounded-2xl dark:border-white'>
-                                <td className="dark:border-white flex justify-center p-2 ">
-                                    <img src={item.image.path} alt="icon" className='h-10 w-10 md:h-16 md:w-16 border border-1 border-black rounded-lg hover:bg-blue-300'
+                            <tr key={item._id} className='userTable-tr2-cnt'>
+                                <td className="userTable-td1-cnt ">
+                                    <img src={item.image.path} alt="icon" className='userTable-img1-cnt'
                                     onError={(e) => {e.target.src = icon}}/>
                                 </td>
-                                <td className=" text-center p-1 text-xs md:text-lg dark:border-white w-fit h-fit text-wrap">{item.name}</td>
-                                <td className=" text-center p-1 text-xs md:text-lg dark:border-white w-fit  h-fit text-wrap">{item.designation}</td>
-                                <td className=" text-center p-1 text-xs md:text-lg dark:border-white w-fit h-fit text-wrap ">{item.department}</td>
-                                <td className=" text-center p-1 text-xs md:text-lg dark:border-white w-fit h-fit text-blue-500 font-medium cursor-pointer underline " onClick={() => navigate("/home/edit", {state: item})}>edit</td>
+                                <td className=" userTable-td2-cnt  ">{item.name}</td>
+                                <td className=" userTable-td2-cnt  ">{item.designation}</td>
+                                <td className=" userTable-td2-cnt  ">{item.department}</td>
+                                <td className=" userTable-td3-cnt " onClick={() => navigate("/home/edit", {state: item})}>edit</td>
                             </tr>))}
                         </tbody>
                     </table>
-                    {!userData.length && <div className='text-center text-lg py-10 dark:text-white'>Click on the AddUser Button for adding Users</div>}
-            </div>
+                    {!userData.length && <div className='userTable-div2-cnt'>Click on the AddUser Button for adding Users</div>}
+                </div>
             </div>
         </>
     );

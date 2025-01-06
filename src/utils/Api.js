@@ -1,96 +1,140 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000/api/v1/admin";
-const BASE_URL_USER = "http://localhost:3000/api/v1/users"
 
 const getAuth = () =>{
     return `Bearer ${localStorage.getItem("ref")}`;
 };
 
 export const SignUp = async(endpoint, payload) =>{
-    return (
-       await axios.post(`${BASE_URL}/${endpoint}`, payload )
-
-    );
+    try{
+        return (
+            await axios.post(`${process.env.REACT_APP_BASE_URL}/${endpoint}`, payload )
+        );
+    }catch(error){
+        console.error(error);
+    }
 };
 
 export const LoginUser = async(endpoint, payload) =>{
-    return (
-        await axios.post(`${BASE_URL}/${endpoint}`, payload)
-    );
+    try{
+
+        return (
+            await axios.post(`${process.env.REACT_APP_BASE_URL}/${endpoint}`, payload)
+        );
+    }catch(error){
+        console.error(error);
+    }
 };
 
 export const GetAdmin = async(endpoint) => {
-    return (
-        await axios.get(`${BASE_URL}/${endpoint}`, {
-            headers: {
-                Authorization: getAuth()
-            }
-        })        
-    )
+    try{
+
+        return (
+            await axios.get(`${process.env.REACT_APP_BASE_URL}/${endpoint}`, {
+                headers: {
+                    Authorization: getAuth()
+                }
+            })        
+        )
+    }catch(error){
+        console.error(error);
+    }
 };
 
 export const EditAdmin = async(endpoint, payload) => {
-    return (
-        await axios.put(`${BASE_URL}/${endpoint}`, payload, {
-            headers: {
-                Authorization: getAuth()
-            }
-        })
-    )
+    try{
+
+        return (
+            await axios.put(`${process.env.REACT_APP_BASE_URL}/${endpoint}`, payload, {
+                headers: {
+                    Authorization: getAuth()
+                }
+            })
+        )
+    }catch(error){
+        console.error(error);
+    }
 }
 
 export const ForgetPasswordUser = async(endpoint, payload) =>{
-    return (
-        await axios.post(`${BASE_URL}/${endpoint}`, payload)
-    );
+    try{
+
+        return (
+            await axios.post(`${process.env.REACT_APP_BASE_URL}/${endpoint}`, payload)
+        );
+    }catch(error){
+        console.error(error);
+    }
 }
 
 export const ResetPasswordUser = async(endpoint, payload) =>{
-    return (
-        await axios.put(`${BASE_URL}/${endpoint}`, payload)
-    );
+    try{
+
+        return (
+            await axios.put(`${process.env.REACT_APP_BASE_URL}/${endpoint}`, payload)
+        );
+    }catch(error){
+        console.error(error);
+    }
 }
 
 
 
 export const CreateUser_ = async(endpoint, payload) =>{
-    return (
-        await axios.post(`${BASE_URL_USER}/${endpoint}`, payload, {
-            headers: {
-                Authorization: getAuth()
-            }
-        })
-    );
-}
+    try{
+
+        return (
+            await axios.post(`${process.env.REACT_APP_BASE_URL_USER}/${endpoint}`, payload, {
+                headers: {
+                    Authorization: getAuth()
+                }
+            })
+        );
+    }catch(error){
+        console.error(error);
+    }
+};
 
 export const EditUser_ = async(endpoint, payload) =>{
-    return (
-        await axios.put(`${BASE_URL_USER}/${endpoint}`, payload, {
-            headers: {
-                Authorization: getAuth()
-            }
-        })
-    );
+    try{
+        return (
+            await axios.put(`${process.env.REACT_APP_BASE_URL_USER}/${endpoint}`, payload, {
+                headers: {
+                    Authorization: getAuth()
+                }
+            })
+        );
+    }catch(error){
+        console.log(error);
+    }
 };
 
 export const GetUser = async(endpoint) =>{
-    return (
-        await axios.get(`${BASE_URL_USER}/${endpoint}`, {
-            headers: {
-                Authorization: getAuth()
-            }
-        })
-    );
+    try{
+
+        return (
+            await axios.get(`${process.env.REACT_APP_BASE_URL_USER}/${endpoint}`, {
+                headers: {
+                    Authorization: getAuth()
+                }
+            })
+        );
+    }catch(error){
+        console.error(error);
+    }
 };
 
 export const GetAllUsers = async(endpoint) =>{
-    return (
-        await axios.get(`${BASE_URL_USER}/${endpoint}`, {
-            headers: {
-                Authorization: getAuth()
-            }
-        })
-    );
+    try{
+        return (
+            await axios.get(`${process.env.REACT_APP_BASE_URL_USER}/${endpoint}`, {
+                headers: {
+                    Authorization: getAuth()
+                }
+            })
+        );
+    }catch(error){
+        console.error(error);
+    }
 };
 

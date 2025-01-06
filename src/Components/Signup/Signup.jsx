@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import { SignUp } from '../../utils/Api';
+import './Signup.scss';
 
 const Signup = () =>{
     const [name, setName] = useState("");
@@ -34,26 +35,26 @@ const Signup = () =>{
 
     return (
         <>
-            <div className="flex items-center justify-center bg-gray-100 h-screen">
-                <div className="bg-white rounded-lg flex flex-col gap-6 p-10 md:px-2 lg:py-10 lg:px-2 w-fit md:w-1/3 lg:w-1/4  items-center justify-center">
-                    <div className="flex justify-center text-2xl font-serif">
+            <div className="signup-maindiv-cnt">
+                <div className="signup-subdiv-cnt">
+                    <div className="signup-div1-cnt">
                         Hi, SignUp Here!          
                     </div>
-                    <div className="flex flex-col gap-2 w-48">
-                        <input type="text" className="border border-1 border-red-400 rounded p-2 placeholder-gray-300" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
-                        {checkName?<span className='text-xs text-left'>Name must be at least 4 letters and only alphabets.</span>:<></>}
-                        <input type="text" className="border border-1 border-red-400 rounded p-2 placeholder-gray-300" placeholder="EmailId" value={emailId} onChange={(e) => setEmailId(e.target.value)}/>
-                        {checkEmailId?<span className='text-xs text-center'>EmailId must contain min 4 letters.</span>:<></>}
-                        <input type="text" className="border border-1 border-red-400 rounded p-2 placeholder-gray-300" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                        {checkPassword?<span className='text-xs text-left'>"Password must include letters, numbers, special characters, and be at least 8 characters long."</span>:<></>}
+                    <div className="signup-div2-cnt">
+                        <input type="text" className="signup-input1-cnt" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
+                        {checkName?<span className='signup-span1-cnt'>Name must be at least 4 letters and only alphabets.</span>:<></>}
+                        <input type="text" className="signup-input2-cnt" placeholder="EmailId" value={emailId} onChange={(e) => setEmailId(e.target.value)}/>
+                        {checkEmailId?<span className='signup-span2-cnt'>EmailId must contain min 4 letters.</span>:<></>}
+                        <input type="text" className="signup-input2-cnt" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                        {checkPassword?<span className='signup-span3-cnt'>"Password must include letters, numbers, special characters, and be at least 8 characters long."</span>:<></>}
                     </div>
-                    <div className='flex flex-col gap-1'>
-                        <span className='text-sm text-center text-red-400'>{errorMessage}</span>
-                        <span className='text-xs text-right'>Already signed up?   
-                            <span className='text-xs text-blue-300 text-right cursor-pointer' onClick={() => navigate('/login')}> Click here</span>
+                    <div className='signup-div3-cnt'>
+                        <span className='signup-span4-cnt'>{errorMessage}</span>
+                        <span className='signup-span5-cnt'>Already signed up?   
+                            <span className='signup-span6-cnt' onClick={() => navigate('/login')}> Click here</span>
                         </span>
                     </div>
-                    <button className="bg-blue-400 rounded p-2 text-white w-24 hover:bg-gray-400 " onClick={handleClick}>Submit</button>
+                    <button className="signup-button1-cnt" onClick={handleClick}>Submit</button>
                 </div>
             </div>
         </>

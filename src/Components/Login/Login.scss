@@ -1,0 +1,93 @@
+.login-maindiv-cnt{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(236, 231, 231);
+    height: 100vh;
+}
+
+.login-subdiv-cnt{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    gap: 20px;
+    padding: 30px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.login-span0-cnt{
+    font-size: 30px;
+    font-family: serif;
+}
+
+.login-div1-cnt{
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+}
+
+.login-input1-cnt{
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 6px;
+    ::placeholder{
+        color: gray;
+    }
+}
+
+.login-div2-cnt{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.login-input2-cnt{
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 6px;
+    ::placeholder{
+        background-color: gray;
+    }
+}
+
+.login-span1-cnt{
+    text-align: left;
+    color: blue;
+    padding-left: 2px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.login-div3-cnt{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+}
+
+.login-span2-cnt{
+    text-align: center;
+    font-size: 14px;
+    color: red;
+}
+
+.login-button1-cnt{
+    background-color: rgb(45, 147, 249);
+    border-radius: 4px;
+    padding: 4px 10px;
+    color: white;
+    &:hover{
+        background-color: gray;
+    }
+}
+
+.login-div4-cnt{
+    font-size: 10px;
+}
+
+
+.login-span4-cnt{
+    color: blue;
+    cursor: pointer;
+}

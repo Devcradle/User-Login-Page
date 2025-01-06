@@ -1,0 +1,132 @@
+.user-createUser-cnt{
+    background-color: rgb(216, 214, 214);   
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.user-createUserSub-cnt{
+   margin-top: 2%;
+   background-color: white;
+   border-radius: 8px;
+   padding: 8px;   
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+   height: fit-content; 
+   align-items: center;
+}
+
+.user-main-cnt{
+    font-size: 24px;
+}
+
+.user-maindiv-cnt{
+    border-radius: 5px;
+    background-color: rgb(251, 197, 72);
+    padding: 20px;
+}
+
+.user-form-cnt{
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   align-items: center;
+   width: fit-content;    
+}
+
+.user-div1-cnt{
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    text-wrap: wrap;
+}
+
+.user-input1-cnt{
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 6px;
+    width: 140px;
+}
+
+.user-div2-cnt{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    font-size: 16px;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.user-div6-cnt{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    font-size: 16px;
+    align-items: center;
+}
+
+.user-input2-cnt{
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 6px;
+    width: 140px;
+}
+
+.user-div3-cnt{
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    font-size: 4px;
+    align-items: center;
+}
+
+.user-input3-cnt{
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 6px;
+    width: 140px;
+    gap: 4px;
+}
+
+.user-div4-cnt{
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    font-size: 16px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.user-div5-cnt{
+    width: 140px;
+    display: flex;
+    align-items: start;
+}
+
+.user-label-cnt{
+    border: 1px;
+    cursor: pointer;
+    background-color: rgb(0, 136, 255);
+    padding: 4px;
+    border-color: white;
+    border-radius: 4px;
+    color: white;
+    font-size: 12px;
+}
+
+.user-button-cnt{
+    background-color: rgb(54, 123, 241);
+    border-radius: 4px;
+    color: white;
+    padding: 4px 8px;
+}
+
+
+

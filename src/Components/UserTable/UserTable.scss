@@ -1,0 +1,135 @@
+.userTable-maindiv-cnt{
+    height: 100vh;
+    background-color: rgb(250, 247, 247);
+    color: black;
+}
+
+.userTable-subdiv-cnt{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    padding: 8px;
+}
+
+.userTable-button1-cnt{
+    padding: 4px 10px;
+    background-color: rgb(250, 33, 80);
+    border: 1px;
+    border-color: wheat;
+    border-radius: 3px;
+    font-size: 18px;
+    color: white;
+    &:hover{
+        background-color: gray;
+    }
+}
+
+
+
+.userTable-div1-cnt{
+    padding: 0px 10px;
+    width: 100%;
+}
+
+.userTable-table-cnt{
+    background-color: white;
+    padding: 1px;
+    width: 100%;
+}
+
+.userTable-thead-cnt{
+    font-size: 6px;
+    background-color: yellow;
+}
+
+.userTable-tr1-cnt{
+    border: 2px;
+    border-color: wheat;
+    border-radius: 3px;
+}
+
+.userTable-th1-cnt{
+    font-size: 16px;
+    padding: 7px 0px;
+}
+
+
+.userTable-tr2-cnt{
+    border-bottom: 2.8px solid rgb(226, 223, 223);
+    border-radius: 3px;
+}
+
+
+.userTable-td1-cnt{
+    display: flex;
+    justify-content: center;
+    padding: 15px 2px;
+}
+
+
+.userTable-img1-cnt{
+    height: 70px;
+    width: 70px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    &:hover{
+        background-color: blue;
+    }
+}
+
+.userTable-td2-cnt{
+    text-align: center;
+    padding: 1px;
+    font-size: 16px;
+    height: fit-content;
+    text-wrap: wrap;
+}
+
+.userTable-td3-cnt{
+    text-align: center;
+    padding: 4px;
+    font-size: 16px;
+    height: fit-content;
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.userTable-div2-cnt{
+    text-align: center;
+    font-size: 18px;
+    padding-top: 20px;
+}
+
+@media (min-width: 300px) and (max-width:650px){
+    .userTable-button1-cnt{
+        padding: 3px 4px;
+        font-size: 12px;
+    }
+
+    .userTable-th1-cnt{
+        font-size: 12px;
+        padding: 4px 1px;
+    }
+
+    .userTable-div2-cnt{
+        font-size: 12px;
+    };
+    
+    .userTable-img1-cnt{
+        height: 35px;
+        width: 35px;
+    }
+    
+    .userTable-td2-cnt{
+        font-size: 12.5px;
+    }   
+
+    .userTable-td3-cnt{
+        font-size: 14px;
+    }
+
+
+}
+
+
