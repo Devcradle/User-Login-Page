@@ -6,7 +6,7 @@ import appStore from './utils/Store/AppStore';
 function App() {
   return (
     <Provider store={appStore}>
-      <RoutingModule/>
+      <RoutingModule />
     </Provider>
   );
 }

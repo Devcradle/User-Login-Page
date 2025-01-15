@@ -1,140 +1,139 @@
-import axios from "axios";
+import axios from 'axios';
 
-
-const getAuth = () =>{
-    return `Bearer ${localStorage.getItem("ref")}`;
+const getAuth = () => {
+  return `Bearer ${localStorage.getItem('ref')}`;
 };
 
-export const SignUp = async(endpoint, payload) =>{
-    try{
-        return (
-            await axios.post(`${process.env.REACT_APP_BASE_URL}/${endpoint}`, payload )
-        );
-    }catch(error){
-        console.error(error);
-    }
+export const signUp = async (endpoint, payload) => {
+  try {
+    return await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/${endpoint}`,
+      payload
+    );
+  } catch (error) {
+    throw new Error('Network Error');
+  }
 };
 
-export const LoginUser = async(endpoint, payload) =>{
-    try{
-
-        return (
-            await axios.post(`${process.env.REACT_APP_BASE_URL}/${endpoint}`, payload)
-        );
-    }catch(error){
-        console.error(error);
-    }
+export const login = async (endpoint, payload) => {
+  try {
+    return await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/${endpoint}`,
+      payload
+    );
+  } catch (error) {
+    throw new Error('Network Error');
+  }
 };
 
-export const GetAdmin = async(endpoint) => {
-    try{
-
-        return (
-            await axios.get(`${process.env.REACT_APP_BASE_URL}/${endpoint}`, {
-                headers: {
-                    Authorization: getAuth()
-                }
-            })        
-        )
-    }catch(error){
-        console.error(error);
-    }
+export const getAdmin = async (endpoint) => {
+  try {
+    return await axios.get(`${process.env.REACT_APP_BASE_URL}/${endpoint}`, {
+      headers: {
+        Authorization: getAuth()
+      }
+    });
+  } catch (error) {
+    throw new Error('Network Error');
+  }
 };
 
-export const EditAdmin = async(endpoint, payload) => {
-    try{
-
-        return (
-            await axios.put(`${process.env.REACT_APP_BASE_URL}/${endpoint}`, payload, {
-                headers: {
-                    Authorization: getAuth()
-                }
-            })
-        )
-    }catch(error){
-        console.error(error);
-    }
-}
-
-export const ForgetPasswordUser = async(endpoint, payload) =>{
-    try{
-
-        return (
-            await axios.post(`${process.env.REACT_APP_BASE_URL}/${endpoint}`, payload)
-        );
-    }catch(error){
-        console.error(error);
-    }
-}
-
-export const ResetPasswordUser = async(endpoint, payload) =>{
-    try{
-
-        return (
-            await axios.put(`${process.env.REACT_APP_BASE_URL}/${endpoint}`, payload)
-        );
-    }catch(error){
-        console.error(error);
-    }
-}
-
-
-
-export const CreateUser_ = async(endpoint, payload) =>{
-    try{
-
-        return (
-            await axios.post(`${process.env.REACT_APP_BASE_URL_USER}/${endpoint}`, payload, {
-                headers: {
-                    Authorization: getAuth()
-                }
-            })
-        );
-    }catch(error){
-        console.error(error);
-    }
+export const editAdmin = async (endpoint, payload) => {
+  try {
+    return await axios.put(
+      `${process.env.REACT_APP_BASE_URL}/${endpoint}`,
+      payload,
+      {
+        headers: {
+          Authorization: getAuth()
+        }
+      }
+    );
+  } catch (error) {
+    throw new Error('Network Error');
+  }
 };
 
-export const EditUser_ = async(endpoint, payload) =>{
-    try{
-        return (
-            await axios.put(`${process.env.REACT_APP_BASE_URL_USER}/${endpoint}`, payload, {
-                headers: {
-                    Authorization: getAuth()
-                }
-            })
-        );
-    }catch(error){
-        console.log(error);
-    }
+export const forgetPasswordAdmin = async (endpoint, payload) => {
+  try {
+    return await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/${endpoint}`,
+      payload
+    );
+  } catch (error) {
+    throw new Error('Network Error');
+  }
 };
 
-export const GetUser = async(endpoint) =>{
-    try{
-
-        return (
-            await axios.get(`${process.env.REACT_APP_BASE_URL_USER}/${endpoint}`, {
-                headers: {
-                    Authorization: getAuth()
-                }
-            })
-        );
-    }catch(error){
-        console.error(error);
-    }
+export const resetPasswordAdmin = async (endpoint, payload) => {
+  try {
+    return await axios.put(
+      `${process.env.REACT_APP_BASE_URL}/${endpoint}`,
+      payload
+    );
+  } catch (error) {
+    throw new Error('Network Error');
+  }
 };
 
-export const GetAllUsers = async(endpoint) =>{
-    try{
-        return (
-            await axios.get(`${process.env.REACT_APP_BASE_URL_USER}/${endpoint}`, {
-                headers: {
-                    Authorization: getAuth()
-                }
-            })
-        );
-    }catch(error){
-        console.error(error);
-    }
+export const createUser = async (endpoint, payload) => {
+  try {
+    return await axios.post(
+      `${process.env.REACT_APP_BASE_URL_USER}/${endpoint}`,
+      payload,
+      {
+        headers: {
+          Authorization: getAuth()
+        }
+      }
+    );
+  } catch (error) {
+    throw new Error('Network Error');
+  }
 };
 
+export const editUser = async (endpoint, payload) => {
+  try {
+    return await axios.put(
+      `${process.env.REACT_APP_BASE_URL_USER}/${endpoint}`,
+      payload,
+      {
+        headers: {
+          Authorization: getAuth()
+        }
+      }
+    );
+  } catch (error) {
+    throw new Error('Network Error');
+  }
+};
+
+export const getUser = async (endpoint) => {
+  try {
+    return await axios.get(
+      `${process.env.REACT_APP_BASE_URL_USER}/${endpoint}`,
+      {
+        headers: {
+          Authorization: getAuth()
+        }
+      }
+    );
+  } catch (error) {
+    throw new Error('Network Error');
+  }
+};
+
+export const getAllUsers = async (endpoint) => {
+  try {
+    return await axios.get(
+      `${process.env.REACT_APP_BASE_URL_USER}/${endpoint}`,
+      {
+        headers: {
+          Authorization: getAuth()
+        }
+      }
+    );
+  } catch (error) {
+    throw new Error('Network Error');
+  }
+};
