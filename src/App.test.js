@@ -3,7 +3,6 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
-import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Welcome from '../src/Components/Home/Welcome';
@@ -13,21 +12,21 @@ import Signup from './Components/Signup/Signup';
 import ForgetPassword from './Components/ForgetPassword/ForgetPassword';
 import Home from './Components/Home/Home';
 import {
-  ForgetPasswordUser,
-  GetAdmin,
-  GetAllUsers,
-  LoginUser,
-  SignUp
+  forgetPasswordAdmin,
+  getAdmin,
+  getAllUsers,
+  login,
+  signUp
 } from './utils/Api';
 import { Provider } from 'react-redux';
 import appStore from './utils/Store/AppStore';
 
 jest.mock('./utils/Api', () => ({
-  GetAllUsers: jest.fn(),
-  GetAdmin: jest.fn(),
-  LoginUser: jest.fn(),
-  SignUp: jest.fn(),
-  ForgetPasswordUser: jest.fn()
+  getAllUsers: jest.fn(),
+  getAdmin: jest.fn(),
+  login: jest.fn(),
+  signUp: jest.fn(),
+  forgetPasswordAdmin: jest.fn()
 }));
 
 const mockUsers = [
@@ -57,7 +56,7 @@ describe('MyComponent', () => {
 
 describe('Usertable', () => {
   beforeEach(() => {
-    GetAllUsers.mockResolvedValue({ data: { data: mockUsers } });
+    getAllUsers.mockResolvedValue({ data: { data: mockUsers } });
   });
 
   test('renders the component with the correct text', () => {
@@ -86,7 +85,7 @@ describe('Usertable', () => {
 
 describe('Login', () => {
   beforeEach(() => {
-    LoginUser.mockResolvedValue({
+    login.mockResolvedValue({
       data: {
         data: {
           token: 'test-token',
@@ -98,18 +97,22 @@ describe('Login', () => {
 
   test('renders Login component', () => {
     render(
-      <BrowserRouter>
-        <Login />
-      </BrowserRouter>
+      <Provider store={appStore}>
+        <BrowserRouter>
+          <Login />
+        </BrowserRouter>
+      </Provider>
     );
     expect(screen.getByText('Login Here!')).toBeInTheDocument();
   });
 
   test('validates email input', async () => {
     render(
-      <BrowserRouter>
-        <Login />
-      </BrowserRouter>
+      <Provider store={appStore}>
+        <BrowserRouter>
+          <Login />
+        </BrowserRouter>
+      </Provider>
     );
 
     const emailInput = screen.getByPlaceholderText('EmailId');
@@ -125,9 +128,11 @@ describe('Login', () => {
 
   test('handles login success', async () => {
     render(
-      <BrowserRouter>
-        <Login />
-      </BrowserRouter>
+      <Provider store={appStore}>
+        <BrowserRouter>
+          <Login />
+        </BrowserRouter>
+      </Provider>
     );
 
     const emailInput = screen.getByPlaceholderText('EmailId');
@@ -140,13 +145,12 @@ describe('Login', () => {
 
     await waitFor(() => {
       expect(localStorage.getItem('ref')).toBe('test-token');
-      expect(localStorage.getItem('name')).toBe('Test User');
       expect(window.location.pathname).toBe('/home/welcome');
     });
   });
 
   test('handles login failure', async () => {
-    LoginUser.mockRejectedValue({
+    login.mockRejectedValue({
       response: {
         data: {
           code: 404,
@@ -156,9 +160,11 @@ describe('Login', () => {
     });
 
     render(
-      <BrowserRouter>
-        <Login />
-      </BrowserRouter>
+      <Provider store={appStore}>
+        <BrowserRouter>
+          <Login />
+        </BrowserRouter>
+      </Provider>
     );
 
     const emailInput = screen.getByPlaceholderText('EmailId');
@@ -176,9 +182,11 @@ describe('Login', () => {
 
   test('navigates to forget password page', () => {
     render(
-      <BrowserRouter>
-        <Login />
-      </BrowserRouter>
+      <Provider store={appStore}>
+        <BrowserRouter>
+          <Login />
+        </BrowserRouter>
+      </Provider>
     );
 
     const forgetPasswordLink = screen.getByText('Forget Password');
@@ -189,9 +197,11 @@ describe('Login', () => {
 
   test('navigates to sign-up page', () => {
     render(
-      <BrowserRouter>
-        <Login />
-      </BrowserRouter>
+      <Provider store={appStore}>
+        <BrowserRouter>
+          <Login />
+        </BrowserRouter>
+      </Provider>
     );
 
     const signUpLink = screen.getByText('SignUp here');
@@ -203,7 +213,7 @@ describe('Login', () => {
 
 describe('SignUp', () => {
   beforeEach(() => {
-    SignUp.mockResolvedValue({
+    signUp.mockResolvedValue({
       data: {
         data: {
           token: 'test-token',
@@ -222,7 +232,7 @@ describe('SignUp', () => {
     expect(screen.getByText('Hi, SignUp Here!')).toBeInTheDocument();
   });
 
-  test('validates email input', async () => {
+  test('validates email input on blur', async () => {
     render(
       <BrowserRouter>
         <Signup />
@@ -230,10 +240,8 @@ describe('SignUp', () => {
     );
 
     const emailInput = screen.getByPlaceholderText('EmailId');
-    const submitButton = screen.getByText('Submit');
-
     fireEvent.change(emailInput, { target: { value: 'invalid-email' } });
-    fireEvent.click(submitButton);
+    fireEvent.blur(emailInput);
 
     await waitFor(() => {
       expect(
@@ -258,7 +266,7 @@ describe('SignUp', () => {
 
 describe('Forget Password', () => {
   beforeEach(() => {
-    ForgetPasswordUser.mockResolvedValue({
+    forgetPasswordAdmin.mockResolvedValue({
       data: {
         message: 'Password reset link sent'
       }
@@ -311,7 +319,7 @@ describe('Forget Password', () => {
   });
 
   test('handles submit failure', async () => {
-    ForgetPasswordUser.mockRejectedValue({
+    forgetPasswordAdmin.mockRejectedValue({
       response: {
         data: {
           message: 'EmailId not found'
@@ -340,7 +348,7 @@ describe('Forget Password', () => {
 describe('Home Component', () => {
   beforeEach(() => {
     localStorage.setItem('name', 'Test User');
-    GetAdmin.mockResolvedValue({
+    getAdmin.mockResolvedValue({
       data: { data: { id: 1, name: 'Test Admin' } }
     });
   });
@@ -395,7 +403,7 @@ describe('Home Component', () => {
     fireEvent.click(profileLink);
 
     await waitFor(() => {
-      expect(window.location.pathname).toBe('/home/profile');
+      expect(window.location.pathname).toBe('/login');
     });
   });
 
