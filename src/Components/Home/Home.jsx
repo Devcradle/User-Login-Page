@@ -4,13 +4,15 @@ import HomeIcon from '@mui/icons-material/Home';
 import icon from '../../image.png';
 import Menu from '@mui/material/Menu';
 import TableChartIcon from '@mui/icons-material/TableChart';
-import { getAllUsers } from '../../utils/Api';
+import { getAllUsers, tokenCheck } from '../../utils/Api';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserlist } from '../../utils/Store/UserSlice';
 import './Home.scss';
 
 const Home = () => {
+  // eslint-disable-next-line no-unused-vars
   const data = useSelector((store) => store.admin.adminList);
+  const name = localStorage.getItem('name');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -49,17 +51,42 @@ const Home = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('ref');
+    localStorage.removeItem('name');
     navigate('/login', { replace: true });
   };
 
   useEffect(() => {
     const handleData = async () => {
-      const userData = await getAllUsers('all');
-      dispatch(getUserlist(userData?.data?.data));
+      try {
+        const userData = await getAllUsers('all');
+        dispatch(getUserlist(userData?.data?.data));
+      } catch (error) {
+        console.error(error);
+      }
     };
     handleData();
   }, [dispatch]);
+
+  useEffect(() => {
+    const handleToken = async () => {
+      try {
+        const verifyToken = await tokenCheck('check');
+        return verifyToken;
+      } catch (error) {
+        console.error(error);
+        navigate('/login', { replace: true });
+      }
+    };
+
+    const setUpInterval = () => {
+      handleToken();
+      const intervalId = setInterval(handleToken, 15 * 60 * 1000);
+      return () => clearInterval(intervalId);
+    };
+
+    const cleanup = setUpInterval();
+    return cleanup;
+  }, []);
 
   return (
     <>
@@ -81,7 +108,7 @@ const Home = () => {
           <div className="home-div2-cnt">
             <span>Hii</span>
             <span className="home-div3-cnt" onClick={() => handleUser()}>
-              {data.name?.split(' ')[0]}
+              {name?.split(' ')[0]}
             </span>
             <button className="home-button2-cnt" onClick={() => handleLogout()}>
               Logout

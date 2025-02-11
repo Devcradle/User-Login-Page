@@ -8,6 +8,10 @@ const adminSlice = createSlice({
   reducers: {
     getAdminlist: (state, action) => {
       state.adminList = action.payload;
+    },
+
+    updateAdminlist: (state, action) => {
+      state.adminList.filter((item) => action.payload.id !== item.id);
     }
   }
 });

@@ -4,6 +4,9 @@ import { login } from '../../utils/Api';
 import './Login.scss';
 import { useDispatch } from 'react-redux';
 import { getAdminlist } from '../../utils/Store/AdminSlice';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
+import { googleLogin } from '../../utils/Api';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -19,7 +22,7 @@ const Login = () => {
       } else if (password) {
         setErrorMessage('');
         const data = await login('login', { emailId, password });
-        localStorage.setItem('ref', data?.data?.data?.token);
+        localStorage.setItem('name', data?.data?.data?.name);
         navigate('/home/welcome');
         dispatch(getAdminlist(data?.data?.data));
       } else if (!password) {
@@ -33,6 +36,20 @@ const Login = () => {
     }
   };
 
+  const handleGoogleLogin = async (details) => {
+    try {
+      const { name, email } = details;
+      const checkLogin = await googleLogin('/glogin', { name, emailId: email });
+      if (checkLogin?.data?.code === 200) {
+        localStorage.setItem('name', checkLogin?.data?.data?.name);
+        navigate('/home/welcome');
+        dispatch(getAdminlist(checkLogin?.data?.data));
+      }
+    } catch (error) {
+      navigate('/', { replace: true });
+      console.error(error);
+    }
+  };
   return (
     <>
       <div className="login-maindiv-cnt">
@@ -80,6 +97,16 @@ const Login = () => {
               SignUp here
             </span>
           </div>
+          <GoogleLogin
+            className="login"
+            onSuccess={(credentialResponse) => {
+              const details = jwtDecode(credentialResponse.credential);
+              handleGoogleLogin(details);
+            }}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+          />
         </div>
       </div>
     </>

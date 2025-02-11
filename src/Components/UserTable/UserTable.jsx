@@ -1,16 +1,28 @@
 import { useNavigate } from 'react-router-dom';
 import icon from './../../image.png';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './UserTable.scss';
+import { getAllUsers } from '../../utils/Api';
+import { getUserlist } from '../../utils/Store/UserSlice';
 
 const UserTable = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const getData = useSelector((store) => store.user.userList) || [];
   const [userData, setUserData] = useState([]);
   useEffect(() => {
+    const fetchData = async () => {
+      if (!userData.length) {
+        const response = await getAllUsers('all');
+        const fetchedData = response?.data?.data;
+        dispatch(getUserlist(fetchedData));
+        setUserData(fetchedData);
+      }
+    };
     setUserData(getData);
-  }, []);
+    fetchData();
+  }, [userData.length, dispatch]);
 
   return (
     <>

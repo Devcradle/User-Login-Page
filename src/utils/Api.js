@@ -1,9 +1,5 @@
 import axios from 'axios';
 
-const getAuth = () => {
-  return `Bearer ${localStorage.getItem('ref')}`;
-};
-
 export const signUp = async (endpoint, payload) => {
   try {
     return await axios.post(
@@ -19,8 +15,35 @@ export const login = async (endpoint, payload) => {
   try {
     return await axios.post(
       `${process.env.REACT_APP_BASE_URL}/${endpoint}`,
-      payload
+      payload,
+      {
+        withCredentials: true
+      }
     );
+  } catch (error) {
+    throw new Error('Network Error');
+  }
+};
+
+export const googleLogin = async (endpoint, payload) => {
+  try {
+    return await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/${endpoint}`,
+      payload,
+      {
+        withCredentials: true
+      }
+    );
+  } catch (error) {
+    throw new Error('Network Error');
+  }
+};
+
+export const tokenCheck = async (endpoint) => {
+  try {
+    return await axios.get(`${process.env.REACT_APP_BASE_URL}/${endpoint}`, {
+      withCredentials: true
+    });
   } catch (error) {
     throw new Error('Network Error');
   }
@@ -29,9 +52,7 @@ export const login = async (endpoint, payload) => {
 export const getAdmin = async (endpoint) => {
   try {
     return await axios.get(`${process.env.REACT_APP_BASE_URL}/${endpoint}`, {
-      headers: {
-        Authorization: getAuth()
-      }
+      withCredentials: true
     });
   } catch (error) {
     throw new Error('Network Error');
@@ -44,9 +65,7 @@ export const editAdmin = async (endpoint, payload) => {
       `${process.env.REACT_APP_BASE_URL}/${endpoint}`,
       payload,
       {
-        headers: {
-          Authorization: getAuth()
-        }
+        withCredentials: true
       }
     );
   } catch (error) {
@@ -82,9 +101,7 @@ export const createUser = async (endpoint, payload) => {
       `${process.env.REACT_APP_BASE_URL_USER}/${endpoint}`,
       payload,
       {
-        headers: {
-          Authorization: getAuth()
-        }
+        withCredentials: true
       }
     );
   } catch (error) {
@@ -98,9 +115,7 @@ export const editUser = async (endpoint, payload) => {
       `${process.env.REACT_APP_BASE_URL_USER}/${endpoint}`,
       payload,
       {
-        headers: {
-          Authorization: getAuth()
-        }
+        withCredentials: true
       }
     );
   } catch (error) {
@@ -113,9 +128,7 @@ export const getUser = async (endpoint) => {
     return await axios.get(
       `${process.env.REACT_APP_BASE_URL_USER}/${endpoint}`,
       {
-        headers: {
-          Authorization: getAuth()
-        }
+        withCredentials: true
       }
     );
   } catch (error) {
@@ -128,9 +141,7 @@ export const getAllUsers = async (endpoint) => {
     return await axios.get(
       `${process.env.REACT_APP_BASE_URL_USER}/${endpoint}`,
       {
-        headers: {
-          Authorization: getAuth()
-        }
+        withCredentials: true
       }
     );
   } catch (error) {
