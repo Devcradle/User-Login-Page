@@ -20,6 +20,8 @@ const Profile = () => {
     const adminData = async () => {
       const data = await getAdmin('');
       dispatch(getAdminlist(data?.data?.data));
+      setName(data?.data?.data?.name);
+      setEmailId(data?.data?.data?.emailId);
     };
     data.length === 0 && adminData();
   }, []);
@@ -50,7 +52,7 @@ const Profile = () => {
       setActiveEmail(true);
       navigate('/home/welcome');
     } catch (error) {
-      throw new Error(error);
+      console.error(error);
     }
   };
 

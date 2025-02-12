@@ -69,7 +69,7 @@ const Signup = () => {
             />
             {checkEmailId && (
               <span className="signup-span2-cnt">
-                EmailId must contain min 4 letters.
+                Invalid email address format
               </span>
             )}
 
@@ -83,8 +83,8 @@ const Signup = () => {
             />
             {checkPassword && (
               <span className="signup-span3-cnt">
-                &quot;Password must include letters, numbers, special
-                characters, and be at least 8 characters long.&quot;
+                Password must include letters, numbers, special characters, and
+                at least be 8 characters long.
               </span>
             )}
           </div>

@@ -3,9 +3,12 @@ import icon from '../../image.png';
 import { useEffect, useState } from 'react';
 import { editUser } from '../../utils/Api';
 import './EditUser.scss';
+import { useDispatch } from 'react-redux';
+import { updateUserlist } from '../../utils/Store/UserSlice';
 
 const EditUser = () => {
   const [name, setName] = useState('');
+  const dispatch = useDispatch();
   const [dept, setDept] = useState('');
   const [designation, setDesignation] = useState('');
   const location = useLocation();
@@ -16,7 +19,13 @@ const EditUser = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      await editUser('', { name, department: dept, designation, id });
+      const data = await editUser('', {
+        name,
+        department: dept,
+        designation,
+        id
+      });
+      dispatch(updateUserlist(data?.data?.data));
       navigate('/home/table');
     } catch (error) {
       console.log(error);

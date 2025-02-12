@@ -21,7 +21,7 @@ const UserTable = () => {
       }
     };
     setUserData(getData);
-    getData.length === 0 && fetchData();
+    fetchData();
   }, [userData.length, dispatch]);
 
   return (
