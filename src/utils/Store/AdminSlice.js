@@ -11,10 +11,10 @@ const adminSlice = createSlice({
     },
 
     updateAdminlist: (state, action) => {
-      state.adminList.filter((item) => action.payload.id !== item.id);
+      state.adminList = action.payload;
     }
   }
 });
 
-export const { getAdminlist } = adminSlice.actions;
+export const { getAdminlist, updateAdminlist } = adminSlice.actions;
 export default adminSlice.reducer;

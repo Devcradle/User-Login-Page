@@ -1,18 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import icon from './../../image.png';
 import { useNavigate } from 'react-router-dom';
-import { editAdmin } from '../../utils/Api';
+import { editAdmin, getAdmin } from '../../utils/Api';
 import './Profile.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAdminlist, updateAdminlist } from '../../utils/Store/AdminSlice';
 
 const Profile = () => {
   const data = useSelector((store) => store.admin.adminList);
+  const dispatch = useDispatch();
   const [activeEmail, setActiveEmail] = useState(true);
   const [activeName, setActiveName] = useState(true);
   const [name, setName] = useState(data?.name);
   const [emailId, setEmailId] = useState(data?.emailId);
   let sname = null;
   let semail = null;
+
+  useEffect(() => {
+    const adminData = async () => {
+      const data = await getAdmin('');
+      dispatch(getAdminlist(data?.data?.data));
+    };
+    data.length === 0 && adminData();
+  }, []);
+
   const handleEdit = (action) => {
     if (action === 'emailId') {
       setActiveEmail(false);
@@ -32,7 +43,8 @@ const Profile = () => {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      await editAdmin('', { name, emailId });
+      const data = await editAdmin('', { name, emailId });
+      dispatch(updateAdminlist(data?.data?.data));
       localStorage.setItem('name', name);
       setActiveName(true);
       setActiveEmail(true);

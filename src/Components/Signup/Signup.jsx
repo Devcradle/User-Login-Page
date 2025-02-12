@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signUp } from '../../utils/Api';
 import './Signup.scss';
-// import { GoogleLogin } from '@react-oauth/google';
-// import { jwtDecode } from 'jwt-decode';
 
 const Signup = () => {
   const [name, setName] = useState('');
